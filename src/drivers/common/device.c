@@ -17,6 +17,11 @@
 POOL_DEF(dev_module_pool, struct dev_module, MAX_DEV_MODULE_COUNT);
 INDEX_DEF(dev_module_idx, 0, MAX_DEV_MODULE_COUNT);
 
+void devfs_notify_new_module(struct dev_module *devmod) __attribute__((weak));
+void devfs_notify_new_module(struct dev_module *devmod) {
+	/* Do nothing */
+}
+
 /**
  * @brief Alloc and initialize device module with given parameters
  *
@@ -60,6 +65,8 @@ struct dev_module *dev_module_create(
 	devmod->dev_open = open;
 	devmod->dev_close = close;
 	devmod->dev_priv = privdata;
+
+	devfs_notify_new_module(devmod);
 
 	return devmod;
 }
