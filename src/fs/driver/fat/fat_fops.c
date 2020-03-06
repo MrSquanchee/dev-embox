@@ -84,7 +84,7 @@ int fat_clean_sb(struct super_block *sb) {
 	return 0;
 }
 
-int fatfs_delete(struct inode *node) {
+int fat_delete(struct inode *node) {
 	struct fat_file_info *fi;
 
 	fi = inode_priv(node);
