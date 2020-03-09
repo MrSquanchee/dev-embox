@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - run: make confload-x86/test/buildgen
+      - run: make confload-test/buildgen
       - run: make -j $(nproc) buildgen
       - name: compress
         run: |
